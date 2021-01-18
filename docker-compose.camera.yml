@@ -1,0 +1,7 @@
+version: "3"
+services:
+    slap_service:
+        devices:
+            - "/dev/video0:/dev/video0"
+
+

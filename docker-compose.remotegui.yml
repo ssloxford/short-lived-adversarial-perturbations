@@ -1,0 +1,11 @@
+version: "3"
+services:
+    slap_service:
+        environment:
+            - QT_X11_NO_MITSHM=1
+            - DISPLAY=${DISPLAY}
+            - XAUTHORITY=/root/.Xauthority
+        volumes:
+            - "/tmp/.docker.xauth:/tmp/.docker.xauth"
+            - "$HOME/.Xauthority:/root/.Xauthority:rw"
+        network_mode: "host"
