@@ -2,8 +2,6 @@
 
 Artifacts for "[SLAP: Improving Physical Adversarial Examples with Short-Lived Adversarial Perturbations](https://arxiv.org/abs/2007.04137)" to appear in Usenix Security 2021.
 
-The code for the experiments will come soon.
-
 <p align="center"><img src="https://raw.githubusercontent.com/ssloxford/short-lived-adversarial-perturbations/master/images/slap.gif" width="70%"></p>
 
 ## Data and Models
