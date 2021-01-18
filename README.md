@@ -7,7 +7,7 @@ The code for the experiments will come soon.
 <p align="center"><img src="https://raw.githubusercontent.com/ssloxford/short-lived-adversarial-perturbations/master/images/slap.gif" width="70%"></p>
 
 ## Data and Models
-Data and models used in this paper are available in this [release](https://github.com/giuliolovisotto/short-lived-adversarial-perturbations/releases/tag/usenix21).
+Data and models used in this paper are available in this [release](https://github.com/ssloxford/short-lived-adversarial-perturbations/releases/tag/usenix21).
 The `data.zip` folder will contain the following files:
 ```
 .  # data.zip
@@ -38,7 +38,7 @@ The `data.zip` folder will contain the following files:
 This repository contains most of the code used in the paper.
 We also publish a [**Docker image**](https://hub.docker.com/r/giuliolovisotto/short-lived-adversarial-perturbations/)
 containing the execution environment and
-[**data and models**](https://github.com/giuliolovisotto/short-lived-adversarial-perturbations/releases/tag/usenix21)
+[**data and models**](https://github.com/ssloxford/short-lived-adversarial-perturbations/releases/tag/usenix21)
 used in this work. 
 
 To use this repository, you will need `docker`, `docker-compose` and a GPU. 
@@ -50,12 +50,12 @@ if you do not have a GPU you can do this inside the container or rebuild it from
 
 Follow these steps:
  
- * `git clone https://github.com/giuliolovisotto/short-lived-adversarial-perturbations.git`
+ * `git clone https://github.com/ssloxford/short-lived-adversarial-perturbations.git`
  * `cd short-lived-adversarial-perturbations/`
- * `wget https://github.com/giuliolovisotto/short-lived-adversarial-perturbations/releases/download/usenix21/data.zip`
+ * `wget https://github.com/ssloxford/short-lived-adversarial-perturbations/releases/download/usenix21/data.zip`
  the `data.zip` contains models and data necessary to run tests.
  * `unzip data.zip`
- * `docker pull giuliolovisotto/short-lived-adversarial-perturbations:usenix21`
+ * `docker pull ssloxford/short-lived-adversarial-perturbations:usenix21`
  * `docker-compose up -d`
  * `docker attach slap_container`
  * `nose2` this runs a set of tests which verify that the basic functionalities run correctly.
@@ -66,7 +66,7 @@ the notebook [example.ipynb](https://localhost:5749)
 The password is `slap@usenix21`.
 
 You can also check the content of this notebook online
-[example.ipynb](https://github.com/giuliolovisotto/short-lived-adversarial-perturbations/blob/main/code/example.ipynb).
+[example.ipynb](https://github.com/ssloxford/short-lived-adversarial-perturbations/blob/main/code/example.ipynb).
 
 ## Contributors
  * [Giulio Lovisotto](https://giuliolovisotto.github.io)
