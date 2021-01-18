@@ -55,7 +55,7 @@ Follow these steps:
  * `wget https://github.com/ssloxford/short-lived-adversarial-perturbations/releases/download/usenix21/data.zip`
  the `data.zip` contains models and data necessary to run tests.
  * `unzip data.zip`
- * `docker pull ssloxford/short-lived-adversarial-perturbations:usenix21`
+ * `docker pull giuliolovisotto/short-lived-adversarial-perturbations:usenix21`
  * `docker-compose up -d`
  * `docker attach slap_container`
  * `nose2` this runs a set of tests which verify that the basic functionalities run correctly.
