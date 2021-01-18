@@ -22,9 +22,9 @@ We report examples of the three objects used in the paper in
 `data/test_run/objects`: `stop_sign.png`, `bottle.png`, `give_way.png`
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/giuliolovisotto/short-lived-adversarial-perturbations/main/data/test_run/objects/stop_sign.png" width="20%">
-<img src="https://raw.githubusercontent.com/giuliolovisotto/short-lived-adversarial-perturbations/main/data/test_run/objects/bottle.png" width="20%">
-<img src="https://raw.githubusercontent.com/giuliolovisotto/short-lived-adversarial-perturbations/main/data/test_run/objects/give_way.png" width="20%">
+<img src="https://raw.githubusercontent.com/ssloxford/short-lived-adversarial-perturbations/main/data/test_run/objects/stop_sign.png" width="20%">
+<img src="https://raw.githubusercontent.com/ssloxford/short-lived-adversarial-perturbations/main/data/test_run/objects/bottle.png" width="20%">
+<img src="https://raw.githubusercontent.com/ssloxford/short-lived-adversarial-perturbations/main/data/test_run/objects/give_way.png" width="20%">
 </p>
 
 NB. it is fundamental that the `<OBJ>.png` image has a well defined
@@ -78,7 +78,7 @@ Generates outputs in `/home/data/<ID>/optimize/<LUX>/<OBJ>/<CLASSIFIER>`:
 The resulting optimized projection can be found in `_best_projection.png`.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/giuliolovisotto/short-lived-adversarial-perturbations/main/images/used_projections.png" width="60%">
+<img src="https://raw.githubusercontent.com/ssloxford/short-lived-adversarial-perturbations/main/images/used_projections.png" width="60%">
 </p>
  
 ### 5. Project adversarial image and collect videos
@@ -87,7 +87,7 @@ object, making sure to correct the perspective of the image based on
 the projector point-of-view. 
 With the image being shown, we collect a set of videos of the target
 object from various angles and distances.
-<p align="center"><img src="https://raw.githubusercontent.com/giuliolovisotto/short-lived-adversarial-perturbations/main/images/sample_video.gif" width="60%"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/ssloxford/short-lived-adversarial-perturbations/main/images/sample_video.gif" width="60%"></p>
 
 ### 6. Detect objects
 In the paper we engineered our own detector which took input videos
