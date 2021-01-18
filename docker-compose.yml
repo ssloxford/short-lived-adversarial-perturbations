@@ -1,0 +1,20 @@
+version: "3"
+services:
+    slap_service:
+#            INCLUDE these build steps if you wish to use custom dockerfile, and comment out image
+#            build:
+#            context: .
+#            dockerfile: Dockerfile
+        image: giuliolovisotto/short-lived-adversarial-perturbations:usenix21
+        ports:
+            - "5749:5749"
+        environment:
+            - QT_X11_NO_MITSHM=1
+            - DISPLAY=$DISPLAY
+        container_name: slap_container
+        stdin_open: true
+        tty: true
+        volumes:
+            - "/tmp/.X11-unix:/tmp/.X11-unix:rw"
+            - "./code:/home/code"
+            - "./data:/home/data"

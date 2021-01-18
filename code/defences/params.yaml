@@ -1,0 +1,20 @@
+dataset:
+  lisa:
+    train_imgs: 4638
+    test_imgs: 587
+    val_imgs: 555
+  gtsrb:
+    train_imgs: 35289
+    test_imgs: 12630
+    val_imgs: 3920
+training:
+  batch_size: 128
+  epochs: 50
+  learning_rate: .001
+  optimizer: adam
+  validation_freq: 1
+  adv:
+    adv_multiplier: 0.2
+    adv_step_size: 0.2
+    adv_grad_norm: infinity
+

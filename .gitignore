@@ -1,0 +1,16 @@
+data/indoor
+data/outdoor
+data/models
+*.DS_Store
+.idea/
+data/test_run/projection_model/**/*.npy
+data/test_run/projection_model/**/*.pdf
+data/test_run/projection_model/**/*.csv
+data/test_run/optimize
+data/datasets
+*__pycache__*
+*.ipynb_checkpoints*
+code/classifiers/tmp/*
+code/defences/tmp/*
+
+

@@ -1,0 +1,19 @@
+{
+  "experiment_id": "test_run",
+  "proj_model_lux": "1234",
+  "object_id": "give_way",
+  "optimizer_name": "adam",
+  "n_epochs": 51,
+  "batch_size": 1000,
+  "learning_rate": 0.001,
+  "number_of_neurons_in_l1": 100,
+  "ratio_of_training_samples": 0.9,
+  "convergence_tol": 0.02,
+  "redo_expansion": false,
+  "test_network": true,
+  "train_cost": 0.08027838170528412,
+  "test_cost": 0.082240991294384,
+  "train_cost_red": 0.02214830368757248,
+  "train_cost_green": 0.014904226176440716,
+  "train_cost_blue": 0.04342212527990341
+}

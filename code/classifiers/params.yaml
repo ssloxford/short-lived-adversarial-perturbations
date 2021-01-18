@@ -1,0 +1,128 @@
+base:
+    grid_size: 30
+    stop_sign_min_dim: 25
+    stop_sign_max_dim: 90
+    interpolation_method: cubic
+    projection_padding_ratio: 0.04
+    brightness_variation_pre: 0.02
+    brightness_variation_post: 0.00
+    pixel_shift_ratio: 0.04
+    camera_aspect_ratio_min: "4:3"
+    camera_aspect_ratio_max: "16:9"
+    rotation_angle_abs: 0.1
+    rotation_pad: 0
+    adam_learning_rate: 0.005
+    batch_size: 5
+    batches_before_checkpoint: 30
+    n_epochs: 50
+    index_of_misdetection_class: null
+    pnorm_mult: 5
+    total_variation_mult: .25
+    loss_function_weight_by_batch: False
+    projection_init_value: zeros
+    adam_beta1: .9
+    adam_beta2: .999
+    max_angle_h: 45
+    max_angle_v: 20
+    gauss_blur_filter_size: 8
+    gauss_blur_filter_std_min: 0.01
+    gauss_blur_filter_std_max: 1.5
+    target_class_index: null
+    channel_offset: 0.02
+    redo_hard_batches: .2
+    input_pad_min: 0.0
+    input_pad_max: 0.15
+    target_class_mult: 1
+maskrcnn:
+    _base:
+        batch_size: 1
+        grid_size: 35
+        adam_learning_rate: 0.005
+        batches_before_checkpoint: 50
+        n_epochs: 120
+        meta_graph_path: /home/data/models/maskrcnn/maskrcnn.meta
+        restore_path: /home/data/models/maskrcnn/maskrcnn
+        pnorm_mult: .25
+        total_variation_mult: 0.25
+    object_specific:
+        stop_sign:
+            index_of_misdetection_class: 12
+        bottle:
+            index_of_misdetection_class: 40
+            pixel_shift_ratio: 0.01
+            grid_size: 75
+            stop_sign_min_dim: 150
+            stop_sign_max_dim: 250
+            projection_init_value: min_ones
+yolov3:
+    _base:
+        meta_graph_path: /home/data/models/yolov3/model_v_batch.ckpt.meta
+        restore_path: /home/data/models/yolov3/model_v_batch.ckpt
+        yolov3_anchor_path: /home/data/models/yolov3/yolo_anchors.txt
+        yolov3_new_size:
+            - 416
+            - 416
+        yolov3_class_name_path: /home/data/models/yolov3/coco.names
+    object_specific:
+        stop_sign:
+            index_of_misdetection_class: 11
+        bottle:
+            index_of_misdetection_class: 39
+            pixel_shift_ratio: 0.01
+            grid_size: 75
+            stop_sign_min_dim: 150
+            stop_sign_max_dim: 250
+gtsrbcnn:
+    _base:
+        index_of_misdetection_class: 14
+        adam_learning_rate: 0.01
+        grid_size: 25
+        meta_graph_path: /home/data/models/gtsrbcnn/cvpr18/model_best_test.meta
+        restore_path: /home/data/models/gtsrbcnn/cvpr18/model_best_test
+        class_descr_fpath: /home/data/models/gtsrbcnn/cvpr18/classes_to_sign_descr.csv
+        projection_init_value: zeros
+        stop_sign_min_dim: 30
+        stop_sign_max_dim: 60
+        stop_sign_skew_ratio: 0.01
+        gtsrbcnn_img_rows: 32
+        gtsrbcnn_img_cols: 32
+        gtsrbcnn_nb_classes: 43
+        gtsrbcnn_nb_channels: 3
+        rotation_angle_abs: 0.15
+        pnorm_mult: 1
+        input_pad_max: 0.3
+    object_specific:
+        give_way:
+            index_of_misdetection_class: 13
+            rotation_angle_abs: 0.01
+        stop_sign:
+            index_of_misdetection_class: 14
+lisacnn:
+    _base:
+        adam_learning_rate: 0.01
+        grid_size: 25
+        rotation_angle_abs: 0.15
+        meta_graph_path: /home/data/models/lisacnn/cvpr18/all_r_ivan.ckpt.meta
+        restore_path: /home/data/models/lisacnn/cvpr18/all_r_ivan.ckpt
+        class_descr_fpath: /home/data/models/gtsrbcnn/cvpr18/classes_to_sign_descr.csv
+        stop_sign_min_dim: 30
+        stop_sign_max_dim: 60
+        stop_sign_skew_ratio: 0.01
+        lisacnn_img_rows: 32
+        lisacnn_img_cols: 32
+        lisacnn_nb_classes: 18
+        lisacnn_nb_channels: 3
+        pnorm_mult: 1
+    object_specific:
+        stop_sign:
+            index_of_misdetection_class: 14
+        give_way:
+            index_of_misdetection_class: 17
+            pixel_shift_ratio: 0.01
+            grid_size: 30
+            adam_learning_rate: 0.02
+            rotation_angle_abs: 0.01
+
+
+
+
