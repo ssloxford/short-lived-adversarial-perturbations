@@ -4,8 +4,13 @@ import os
 import pandas as pd
 import yaml
 from tqdm import tqdm
+from scipy import optimize
 from classifiers.lisacnn.detector import LisaCNNModel
 from classifiers.gtsrbcnn.detector import GtsrbCNNModel
+
+
+def quadratic_func(x, a, b, c):
+    return a*x**2 + b*x + c
 
 
 class Sentinet(object):
@@ -86,6 +91,102 @@ class Sentinet(object):
 
         avg_conf_ip /= total
         return fooled_yr, avg_conf_ip, total, per_image_results
+    
+    @classmethod
+    def generate_curve(cls, confidences, fooled_percentages, number_of_bins=25):
+        """
+        Algorithm 4 in SentiNet paper (https://arxiv.org/pdf/1812.00292v4.pdf).
+
+        Given two arrays containing the per-sample confidences and fooled_percentages
+        (returned by SentiNet Algorithm 3), digitizes confidences into a discrete
+        number_of_bins, then uses the per-bin maximum confidence and fooled_percentage
+        as a set of points for fitting a quadratic function. For each point that lies
+        above the curve also computes an average distance of 
+        these points from the curve, namely threshold.
+
+        The curve has to be fit on benign samples.
+        At test time, a point (x,y) is considered adversarial if
+            y > curve(x) & dist((x,y),(x,curve(x)) > threshold ?
+
+        Args:
+            confidences (list[float]): the confidences for a set of samples
+            fooled_percentages (list[float]): the fooled percentages for a set of samples
+            number_of_bins (int): the number of bins to use for binning
+        Returns:
+            (func): a function with the fitted curve
+            (threshold): the threshold above the curve
+
+        """
+        assert len(confidences) == len(fooled_percentages)
+
+        confidences = np.asarray(confidences)
+        fooled_percentages = np.asarray(fooled_percentages)
+
+        # number of bins used to digitize the confidences
+        number_of_bins = 25
+        min_conf = confidences.min()
+        max_conf = confidences.max()
+
+        # make number_of_bins bins from min to max confidence
+        bins = np.arange(min_conf, max_conf, (max_conf - min_conf)/number_of_bins)
+
+        # save which bin each sample belongs to in a new column
+        bin_identifier = np.digitize(confidences, bins)
+
+        xs = []
+        ys = []
+        for i, _ in enumerate(bins):
+            # filter only the samples that belong to this confidence bin
+            # (offset by one because of np.digitise above)
+            bin_mask = bin_identifier == i+1
+            bin_conf, bin_fp = confidences[bin_mask], fooled_percentages[bin_mask]
+            if bin_conf.shape[0] > 0:
+                # get largest FoolPercentage
+                i_of_max_fp = np.argmax(bin_fp)
+                xs.append(bin_conf[i_of_max_fp])
+                ys.append(bin_fp[i_of_max_fp])
+
+        # fit curve to per-bin points
+        curve_params, covariance = optimize.curve_fit(quadratic_func, np.array(xs), np.array(ys))
+
+        avg_d = 0
+        curve_func = lambda x: quadratic_func(x, *curve_params)
+
+        # compute threshold 
+        for x, y in zip(xs, ys):
+            # NB. there is a mismatch between the code for Algorithm 4 in 
+            # the SentiNet paper and the text. In the following if statement
+            # we use the interpretation found in the text.
+            if curve_func(x) < y:  # for each point lying above the curve
+                # create function that returns 2D distance from (x,y) and (a, f(a))
+                distance_func = lambda a: np.sqrt((x-a)**2+(y-curve_func(a))**2)
+                # find minimum value for a
+                result = optimize.minimize(distance_func, np.array(x), method='COBYLA')
+                distance = distance_func(result['x'])
+                # accumulate distances of points above curve
+                avg_d += distance
+
+        d = avg_d / confidences.shape[0]
+        return curve_func, d
+    
+    @classmethod
+    def is_adversarial(cls, curve, threshold, point):
+        """
+        Given curve describing a (quadratic) function 
+        a threshold and a point = (x, y) returns True if 
+            y > curve(x) & dist((x,y),(x,curve(x)) > threshold
+        returns False otherwise.
+        """
+        x, y = point
+        y_prime = curve(x)
+        is_adv = False
+        if y > y_prime:
+            # we are above the curve, now calculate distance to curve
+            distance_func = lambda a: np.sqrt((x-a)**2+(y-curve(a))**2)
+            result = optimize.minimize(distance_func, x, method='COBYLA')
+            distance = distance_func(result['x'])
+            is_adv = distance > threshold
+        return is_adv
 
     def run_sentinet(self, image_file, threshold, test_imgpaths, num_candidates=5, saliency='xrai', pattern='noise'):
 
