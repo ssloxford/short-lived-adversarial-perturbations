@@ -1,8 +1,30 @@
 # SLAP: Improving Physical Adversarial Examples with Short-Lived Adversarial Perturbations
 
-Artifacts for "[SLAP: Improving Physical Adversarial Examples with Short-Lived Adversarial Perturbations](https://arxiv.org/abs/2007.04137)" to appear in Usenix Security 2021.
+Artifacts for the paper "[SLAP: Improving Physical Adversarial Examples with Short-Lived Adversarial Perturbations](https://arxiv.org/pdf/2007.04137.pdf)" published in the [30th Usenix Security Symposium](https://www.usenix.org/conference/usenixsecurity21) (2021).
 
-<p align="center"><img src="https://raw.githubusercontent.com/ssloxford/short-lived-adversarial-perturbations/master/images/slap.gif" width="70%"></p>
+We introduce a new attack vector to realize physical Adversarial Examples
+(AE): using a projector.
+By specifically optimizing the perturbation to project on a target object,
+we are able to create physical AE that fool deep neural networks
+for image classification and object detection.
+
+<p align="center"><img src="https://raw.githubusercontent.com/ssloxford/short-lived-adversarial-perturbations/master/images/projection.gif" width="40%"></p>
+
+We design an optimization pipeline that accounts for (1) the realizability
+of projected colours and (2) the robustness of the AE to environmental changes.
+
+<p align="center"><img src="https://raw.githubusercontent.com/ssloxford/short-lived-adversarial-perturbations/master/images/slap.gif" width="60%"></p>
+
+We test four different computer vision models: YOLOv3, MaskRCNN, LISACNN and GTSRBCNN,
+our implementations are available in this repository.
+SLAP in practice, targeting a Stop Sign:
+
+<p align="center"><img src="https://raw.githubusercontent.com/ssloxford/short-lived-adversarial-perturbations/master/images/videos.gif" width="95%"></p>
+
+The same pipeline can be applied to any target object class, here are examples 
+of targeting class "Bottle" and class "Give Way":
+
+![Other objects](images/other_objects.png "Other objects")
 
 ## Data and Models
 Data and models used in this paper are available in this [release](https://github.com/ssloxford/short-lived-adversarial-perturbations/releases/tag/usenix21).
