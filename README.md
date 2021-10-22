@@ -1,17 +1,17 @@
 # SLAP: Improving Physical Adversarial Examples with Short-Lived Adversarial Perturbations
 
-Artifacts for the paper "[SLAP: Improving Physical Adversarial Examples with Short-Lived Adversarial Perturbations](https://arxiv.org/pdf/2007.04137.pdf)" published in the [30th Usenix Security Symposium](https://www.usenix.org/conference/usenixsecurity21) (2021).
+Artifacts for the paper "[SLAP: Improving Physical Adversarial Examples with Short-Lived Adversarial Perturbations](https://www.usenix.org/conference/usenixsecurity21/presentation/lovisotto)" published in the [30th Usenix Security Symposium](https://www.usenix.org/conference/usenixsecurity21) (2021).
 
 We introduce a new attack vector to realize physical Adversarial Examples
 (AE): using a projector.
 By specifically optimizing the perturbation to project on a target object,
-we are able to create physical AE that fool deep neural networks
+we are able to create physical Adversarial Examples that fool deep neural networks
 for image classification and object detection.
 
 <p align="center"><img src="https://raw.githubusercontent.com/ssloxford/short-lived-adversarial-perturbations/master/images/projection.gif" width="40%"></p>
 
 We design an optimization pipeline that accounts for (1) the realizability
-of projected colours and (2) the robustness of the AE to environmental changes.
+of projected colours and (2) the robustness of the Adversarial Examples to environmental changes.
 
 <p align="center"><img src="https://raw.githubusercontent.com/ssloxford/short-lived-adversarial-perturbations/master/images/slap.gif" width="60%"></p>
 
@@ -25,6 +25,9 @@ The same pipeline can be applied to any target object class, here are examples
 of targeting class "Bottle" and class "Give Way":
 
 ![Other objects](images/other_objects.png "Other objects")
+
+See the conference presentation [slides](https://www.usenix.org/system/files/sec21_slides_lovisotto.pdf) and Giulio's conference [presentation video](https://www.youtube.com/watch?v=o4LrVm5LP2E).
+
 
 ## Data and Models
 Data and models used in this paper are available in this [release](https://github.com/ssloxford/short-lived-adversarial-perturbations/releases/tag/usenix21).
@@ -87,6 +90,22 @@ The password is `slap@usenix21`.
 
 You can also check the content of this notebook online
 [example.ipynb](https://github.com/ssloxford/short-lived-adversarial-perturbations/blob/main/code/example.ipynb).
+
+## Citation
+If you use this repository please cite the paper as follows:
+```
+@inproceedings {272218,
+  author = {Giulio Lovisotto and Henry Turner and Ivo Sluganovic and Martin Strohmeier and Ivan Martinovic},
+  title = {{SLAP}: Improving Physical Adversarial Examples with Short-Lived Adversarial Perturbations},
+  booktitle = {30th {USENIX} Security Symposium ({USENIX} Security 21)},
+  year = {2021},
+  isbn = {978-1-939133-24-3},
+  pages = {1865--1882},
+  url = {https://www.usenix.org/conference/usenixsecurity21/presentation/lovisotto},
+  publisher = {{USENIX} Association},
+  month = aug,
+}
+```
 
 ## Contributors
  * [Giulio Lovisotto](https://giuliolovisotto.github.io)
